@@ -64,7 +64,9 @@ function searchWiki(searchTerm, destination_card) {
 
       for (let i in pages) {
         //.replaced is used to let html know that ' should be there and not a signal for end of string.
-        let innerDiv = $(`<div class="card-panel grey lighten-5 z-depth-1" 
+
+        let innerDiv = $(`<div class="card-panel " 
+
                                    data-images='${JSON.stringify(
                                      pages[i].images
                                    ).replace(/'/g, `\\"`)}'>`);
@@ -76,7 +78,8 @@ function searchWiki(searchTerm, destination_card) {
           innerDiv.append(imgDiv);
         }
 
-        innerDiv.append(`<div class="col s10" '> 
+        innerDiv.append(`<div class="" '> 
+
                                 <h5 class="dest-name"> ${searchTerm} </h5>
                                 <span class="dest-summary black-text"> ${pages[i].extract} </span>
                                 </div>
@@ -94,7 +97,8 @@ function displayLocations(locations) {
   //each location call wiki for wiki page
   let length = locations.length < 10 ? locations.length : 10;
 
-  let destination_card = $("<div class='destination-card col s12 m8 l9'>");
+  let destination_card = $("<div class='destination-card '>");
+
   for (let i = 0; i < length; i++) {
     searchWiki(locations[i].location, destination_card);
   }
@@ -124,7 +128,8 @@ function createActors(actors) {
 
 //Displaying information for movie-summary-card
 function addMovieInfo(movie) {
-  let movieInfo = $("<div class='movie-summary-card col s12 m4 l3'>");
+  let movieInfo = $("<div class='movie-summary-card '>");
+
   //checking if there is a URL to post
   let trailer = movie.trailer.qualities
     ? movie.trailer.qualities[1].videoURL
@@ -145,7 +150,7 @@ function addMovieInfo(movie) {
                         width="100%" controls>
                     </div>
                     <div class="card-content ">
-                        <h5 class="movie-title">${movie.title} </h5>
+                        <h3 class="movie-title">${movie.title} </h3>
                         <p> ${plot} </p>
                     </div> `);
 
@@ -155,6 +160,8 @@ function addMovieInfo(movie) {
 
   return movieInfo;
 }
+
+
 $(".searchBtn").on("click", function () {
   event.preventDefault();
   let movieName = $(".search").val();
@@ -172,7 +179,8 @@ format=json&language=en-us&aka=0&filter=2&exactFilter=0&limit=1&trailers=1&actor
     }
 
     let movieData = response.data.movies[0];
-    let movieCard = $("<div class='row movie-card'>");
+    let movieCard = $("<div class='movie-card'>");
+
 
     //Display movie-information
     let movieInfo = addMovieInfo(movieData);
